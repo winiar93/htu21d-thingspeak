@@ -68,6 +68,4 @@ class HTU21D(object):
         raw =  self._issue_measurement(self.ISSUE_HU_ADDRESS)
         return -6 + (125.0 * raw / 65536)
 
-    def test(self):
-        print("estoy dentro")
 
