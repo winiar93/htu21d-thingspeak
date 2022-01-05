@@ -5,18 +5,22 @@ import network
 import urequests
 import time
 
+machine.freq(80000000)
+
 WIFI_SSID = '*'
 WIFI_PASS = '*'
 HTTP_HEADERS = {'Content-Type': 'application/json'} 
 THINGSPEAK_WRITE_API_KEY = '*'
 
-nic = network.WLAN(network.STA_IF)
-nic.active(True)
-time.sleep(0.5)
-nic.connect(WIFI_SSID, WIFI_PASS)
-while not nic.isconnected():
-    machine.idle()
-    
+try:
+    nic = network.WLAN(network.STA_IF)
+    nic.active(True)
+    time.sleep(0.5)
+    nic.connect(WIFI_SSID, WIFI_PASS)
+    while not nic.isconnected():
+        machine.idle()
+except OSError:
+    machine.reset()
 
 sensor_data = HTU21D(22,21)
 
